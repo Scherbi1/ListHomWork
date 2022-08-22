@@ -4,9 +4,13 @@ import org.springframework.stereotype.Service;
 import pro.sry.ListHomWork.exceptions.EmployeeNotFoundException;
 import pro.sry.ListHomWork.exceptions.EmployeeAlreadyAddedException;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class  EmployeeServiceImpl implements EmployeeService {
     private final List<Employee> employeeList;
 
     public EmployeeServiceImpl(List<Employee> employeeList) {
@@ -14,8 +18,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String name, String surName) {
-        Employee employee = new Employee(name, surName);
+    public Employee add(String name, String surName, double salaryStaff, int departmentNumber) {
+
+        Employee employee = new Employee(name, surName,salaryStaff,departmentNumber);
 
         if (!employeeList.add(employee)) {
             throw new EmployeeAlreadyAddedException("Сотрудник есть уже в базе");
@@ -26,8 +31,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee remove(String name, String surName) {
-        Employee employee = new Employee(name,surName);
+    public Employee remove(String name, String surName, double salaryStaff, int departmentNumber) {
+        Employee employee = new Employee(name,surName, salaryStaff, departmentNumber);
         if (employeeList.contains(employee)) {
             employeeList.remove(employee);
             System.out.print("Сотрудник успешно удален из базы данных");
@@ -38,8 +43,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public  Employee find(String name, String surName)  {
-        Employee employee = new Employee(name,surName);
+    public  Employee find(String name, String surName, double salaryStaff, int departmentNumber)  {
+        Employee employee = new Employee(name,surName, salaryStaff, departmentNumber);
         if (employeeList.contains(employee)) {
             return employee;
         } else {
@@ -52,4 +57,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeList;
     }
 
+    public List<Employee> findAllDepartment(int departmentNumber) {
+        List<Employee> department = employeeList.stream()
+                .filter((d)->d.getDepartmentNumber()==departmentNumber)
+                .collect(Collectors.toList());
+        return department;
+    }
+
+    public List<Employee> FindDepartmentMax(int departmentNumber) {
+        List<Employee> e= employeeList.stream()
+                .filter((d)->d.getDepartmentNumber()==departmentNumber)
+                .max(Comparator.comparing(employee->employee.getSalaryStaff()))
+                .stream().collect(Collectors.toList());
+        return e;
+    }
+    public List<Employee> FindDepartmentMin(int departmentNumber) {
+        List<Employee> e= employeeList.stream()
+                .filter((d)->d.getDepartmentNumber()==departmentNumber)
+                .min(Comparator.comparing(employee->employee.getSalaryStaff()))
+                .stream().collect(Collectors.toList());
+        return e;
+    }
 }

@@ -18,19 +18,32 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String name, @RequestParam String surName) {
-        return service.add(name, surName);
+    public Employee addEmployee(@RequestParam String name, @RequestParam String surName,@RequestParam double salaryStaff,@RequestParam int departmentNumber) {
+        System.out.println( );
+        return service.add(name, surName,salaryStaff,departmentNumber);
     }
     @GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam String name, @RequestParam String surName) {
-        return service.remove(name, surName);
+    public Employee removeEmployee(@RequestParam String name, @RequestParam String surName,@RequestParam double salaryStaff,@RequestParam int departmentNumber) {
+        return service.remove(name, surName,salaryStaff,  departmentNumber);
     }
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String name, @RequestParam String surName) {
-        return service.find(name, surName);
+    public Employee findEmployee(@RequestParam String name, @RequestParam String surName,@RequestParam double salaryStaff,@RequestParam int departmentNumber) {
+        return service.find(name, surName, salaryStaff,  departmentNumber);
     }
     @GetMapping("/findAll")
     public List<Employee> findAll() {
         return service.findAll();
+    }
+    @GetMapping("/findAll/department")
+    public List<Employee>findAllDepartment(@RequestParam  int departmentNumber){
+        return service.findAllDepartment(departmentNumber);
+    }
+    @GetMapping("/findAll/department/Max-salary")
+    public List<Employee>FindDepartmentMax(@RequestParam int departmentNumber) {
+        return service.FindDepartmentMax(departmentNumber);
+    }
+    @GetMapping("/findAll/department/Min-salary")
+    public List<Employee>FindDepartmentMin(@RequestParam int departmentNumber) {
+        return service.FindDepartmentMin(departmentNumber);
     }
 }
