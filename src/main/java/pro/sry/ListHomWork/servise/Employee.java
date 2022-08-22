@@ -3,12 +3,16 @@ package pro.sry.ListHomWork.servise;
 import java.util.Objects;
 
 public class Employee {
-   private final String name;
-   private final String surName;
+    private final String name;
+    private final String surName;
+    private double salaryStaff;
+    private int departmentNumber;
 
-    public Employee(String name, String surName) {
+    public Employee(String name, String surName, double salaryStaff, int departmentNumber) {
         this.name = name;
         this.surName = surName;
+        this.departmentNumber = departmentNumber;
+        this.salaryStaff = salaryStaff;
     }
 
     public String getName() {
@@ -17,6 +21,14 @@ public class Employee {
 
     public String getSurName() {
         return surName;
+    }
+
+    public double getSalaryStaff() {
+        return salaryStaff;
+    }
+
+    public int getDepartmentNumber() {
+        return departmentNumber;
     }
 
     @Override
@@ -30,11 +42,20 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(name, surName);
+
+
     }
 
     @Override
     public String toString() {
-        return "Имя - " + name + '\'' +
-                " Фамилия - " + surName + '\'';
+        return
+                "Имя - " + name + '\'' +
+                ", фамилия - " + surName + '\'' +
+                ", зарплата - " + salaryStaff +
+                ", отдел - " + departmentNumber;
     }
 }
+
+
+
+
