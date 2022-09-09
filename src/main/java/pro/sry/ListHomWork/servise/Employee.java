@@ -3,32 +3,28 @@ package pro.sry.ListHomWork.servise;
 import java.util.Objects;
 
 public class Employee {
-    private final String name;
-    private final String surName;
-    private double salaryStaff;
-    private int departmentNumber;
+    private String nameProduct;
+    private double priceProduct;
+    private int ID;
 
-    public Employee(String name, String surName, double salaryStaff, int departmentNumber) {
-        this.name = name;
-        this.surName = surName;
-        this.departmentNumber = departmentNumber;
-        this.salaryStaff = salaryStaff;
+    public Employee(String nameProduct, double priceProduct, int ID) {
+        this.nameProduct = nameProduct;
+        this.priceProduct = priceProduct;
+        this.ID = ID;
     }
 
-    public String getName() {
-        return name;
+
+
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public String getSurName() {
-        return surName;
+    public double getPriceProduct() {
+        return priceProduct;
     }
 
-    public double getSalaryStaff() {
-        return salaryStaff;
-    }
-
-    public int getDepartmentNumber() {
-        return departmentNumber;
+    public int getID() {
+        return ID;
     }
 
     @Override
@@ -36,23 +32,19 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return name.equals(employee.name) && surName.equals(employee.surName);
+        return Double.compare(employee.priceProduct, priceProduct) == 0 && ID == employee.ID && nameProduct.equals(employee.nameProduct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surName);
-
-
+        return Objects.hash(nameProduct, priceProduct, ID);
     }
 
     @Override
     public String toString() {
-        return
-                "Имя - " + name + '\'' +
-                ", фамилия - " + surName + '\'' +
-                ", зарплата - " + salaryStaff +
-                ", отдел - " + departmentNumber;
+        return " Код продукт " + ID+
+                " Продукт " + nameProduct +
+                " Цена " + priceProduct ;
     }
 }
 

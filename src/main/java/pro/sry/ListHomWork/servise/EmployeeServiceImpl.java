@@ -1,81 +1,49 @@
 package pro.sry.ListHomWork.servise;
 
 import org.springframework.stereotype.Service;
-import pro.sry.ListHomWork.exceptions.EmployeeNotFoundException;
-import pro.sry.ListHomWork.exceptions.EmployeeAlreadyAddedException;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
-public class  EmployeeServiceImpl implements EmployeeService {
-    private final List<Employee> employeeList;
+public class EmployeeServiceImpl implements EmployeeService {
+    List<Employee>employeeList = new ArrayList<>(List.of(
+            new Employee(
+                    "Table",
+                    8450.0,
+                    1),
 
-    public EmployeeServiceImpl(List<Employee> employeeList) {
-        this.employeeList = employeeList;
-    }
+            new Employee(
+                    "Chair",
+                    990,
+                    2),
 
+            new Employee(
+                    "Bed",
+                    11450.0,
+                    3),
+
+            new Employee(
+                    "Sofa",
+                    9453.0,
+                    4),
+
+            new Employee(
+                    "Cupboard",
+                    16700.0,
+                    5)
+    ));
+    List<Employee>e = new ArrayList<>();
     @Override
-    public Employee add(String name, String surName, double salaryStaff, int departmentNumber) {
+    public  List<Employee> addEmployee(List employeeList) {
 
-        Employee employee = new Employee(name, surName,salaryStaff,departmentNumber);
-
-        if (!employeeList.add(employee)) {
-            throw new EmployeeAlreadyAddedException("Сотрудник есть уже в базе");
-        } else {
-            System.out.println("Сотрудник успешно добавлен");
-            return employee;
-        }
-    }
-
-    @Override
-    public Employee remove(String name, String surName, double salaryStaff, int departmentNumber) {
-        Employee employee = new Employee(name,surName, salaryStaff, departmentNumber);
-        if (employeeList.contains(employee)) {
-            employeeList.remove(employee);
-            System.out.print("Сотрудник успешно удален из базы данных");
-            return employee;
-        }
-          throw new EmployeeNotFoundException("Сотрудник успешно удален из базы");
-
-    }
-
-    @Override
-    public  Employee find(String name, String surName, double salaryStaff, int departmentNumber)  {
-        Employee employee = new Employee(name,surName, salaryStaff, departmentNumber);
-        if (employeeList.contains(employee)) {
-            return employee;
-        } else {
-            throw new EmployeeNotFoundException("Сотрудник в базе не найдет");
-        }
-    }
-
-    @Override
-    public List<Employee> findAll() {
-        return employeeList;
-    }
-
-    public List<Employee> findAllDepartment(int departmentNumber) {
-        List<Employee> department = employeeList.stream()
-                .filter((d)->d.getDepartmentNumber()==departmentNumber)
-                .collect(Collectors.toList());
-        return department;
-    }
-
-    public List<Employee> FindDepartmentMax(int departmentNumber) {
-        List<Employee> e= employeeList.stream()
-                .filter((d)->d.getDepartmentNumber()==departmentNumber)
-                .max(Comparator.comparing(employee->employee.getSalaryStaff()))
-                .stream().collect(Collectors.toList());
+        e.add(Employee.getID());
+        e.add(Employee.getNameProduct());
+        e.add(Employee.getPriceProduct());
         return e;
     }
-    public List<Employee> FindDepartmentMin(int departmentNumber) {
-        List<Employee> e= employeeList.stream()
-                .filter((d)->d.getDepartmentNumber()==departmentNumber)
-                .min(Comparator.comparing(employee->employee.getSalaryStaff()))
-                .stream().collect(Collectors.toList());
+
+    @Override
+    public List<Employee> get(List e) {
         return e;
     }
 }

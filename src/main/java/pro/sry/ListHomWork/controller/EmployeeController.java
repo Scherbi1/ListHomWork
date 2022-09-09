@@ -8,42 +8,22 @@ import pro.sry.ListHomWork.servise.Employee;
 import pro.sry.ListHomWork.servise.EmployeeService;
 
 import java.util.List;
+
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/store")
 public class EmployeeController {
-    private final EmployeeService service;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService service) {
-        this.service = service;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = EmployeeService;
     }
 
-    @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String name, @RequestParam String surName,@RequestParam double salaryStaff,@RequestParam int departmentNumber) {
-        System.out.println( );
-        return service.add(name, surName,salaryStaff,departmentNumber);
+    @GetMapping("/order/add")
+    public Integer addEmployee(@RequestParam("ID") Integer ID) {
+        return EmployeeService.addEmployee(ID);
     }
-    @GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam String name, @RequestParam String surName,@RequestParam double salaryStaff,@RequestParam int departmentNumber) {
-        return service.remove(name, surName,salaryStaff,  departmentNumber);
-    }
-    @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String name, @RequestParam String surName,@RequestParam double salaryStaff,@RequestParam int departmentNumber) {
-        return service.find(name, surName, salaryStaff,  departmentNumber);
-    }
-    @GetMapping("/findAll")
-    public List<Employee> findAll() {
-        return service.findAll();
-    }
-    @GetMapping("/findAll/department")
-    public List<Employee>findAllDepartment(@RequestParam  int departmentNumber){
-        return service.findAllDepartment(departmentNumber);
-    }
-    @GetMapping("/findAll/department/Max-salary")
-    public List<Employee>FindDepartmentMax(@RequestParam int departmentNumber) {
-        return service.FindDepartmentMax(departmentNumber);
-    }
-    @GetMapping("/findAll/department/Min-salary")
-    public List<Employee>FindDepartmentMin(@RequestParam int departmentNumber) {
-        return service.FindDepartmentMin(departmentNumber);
+    @GetMapping("/order/get")
+    public Employee get(List e) {
+        return EmployeeService.get(e);
     }
 }
