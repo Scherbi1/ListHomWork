@@ -2,12 +2,12 @@ package pro.sry.ListHomWork.servise;
 
 import java.util.Objects;
 
-public class Employee {
+public class Basket {
     private String nameProduct;
     private double priceProduct;
     private int ID;
 
-    public Employee(String nameProduct, double priceProduct, int ID) {
+    public Basket(String nameProduct, double priceProduct, int ID) {
         this.nameProduct = nameProduct;
         this.priceProduct = priceProduct;
         this.ID = ID;
@@ -31,7 +31,7 @@ public class Employee {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
+        Basket employee = (Basket) o;
         return Double.compare(employee.priceProduct, priceProduct) == 0 && ID == employee.ID && nameProduct.equals(employee.nameProduct);
     }
 
@@ -44,7 +44,7 @@ public class Employee {
     public String toString() {
         return " Код продукт " + ID+
                 " Продукт " + nameProduct +
-                " Цена " + priceProduct ;
+                " Цена " + priceProduct + " " ;
     }
 }
 
